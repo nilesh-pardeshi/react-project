@@ -1,0 +1,28 @@
+.Ticket{
+    border: 1px solid pink;
+    border-radius: 14px;
+    width: 200px;
+    margin-bottom: 15px;
+}
+
+.Ticket {
+  background: #fff;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 300px;
+  margin: 1rem auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.Ticket:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.Ticket h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #444;
+}
