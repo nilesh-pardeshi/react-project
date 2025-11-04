@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import React, { useEffect, useState } from 'react'
+import{apiUrl, filterData} from "./data";
+import Navbar from './components/Navbar';
+import Filter from './components/Filter';
+import Cards from "./components/Cards";
+import Spinner from './components/Spinner';
+import { toast } from 'react-toastify';
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const[courses, setCourses]= useState(null);
+  const[loading, setLoading]= useState(true);
+
+  async function fetchData(){
+    setLoading(true);
+    try{
+      let response= await fetch(apiUrl);
+      let output= await response.json();
+      //output
+      setCourses(output.data);
+    }catch(error){
+      toast.error("Network me koi dikkat hai");
+    }
+    setLoading(false);
+  }
+  useEffect(()=>{
+    fetchData();
+  },[])
+ 
   return (
-    <>
+    <div>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Navbar/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div>
+        <Filter filterData={filterData}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <div>
+        {
+          loading ? (<Spinner/>) : (<Cards courses={courses}/>)
+        }
+      </div>
+    </div>
+  );
 }
 
 export default App
