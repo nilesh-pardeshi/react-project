@@ -1,12 +1,12 @@
 import React from "react";
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <div>
-      <nav>
-        <h1>Top Courses</h1>
-      </nav>
-    </div>
+    <nav className="bg-[#2a2f4f] py-4 shadow-lg">
+      <h1 className="text-3xl font-bold text-center text-white">
+        Top Courses
+      </h1>
+    </nav>
   );
 }
 
